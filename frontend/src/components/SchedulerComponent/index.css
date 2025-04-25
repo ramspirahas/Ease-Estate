@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Poppins;
+}
+
+
+
+/* Style the TimePicker container */
+.time-picker-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 250px;
+}
+
+/* Style the label */
+.time-picker-container label {
+  font-size: 14px;
+  color: #333;
+}
+
+.time-picker-container .react-time-picker {
+  width: 150px;
+  height: 38px;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+  padding-left: 9px;
+  font-size: 15px;
+  color: #000000;
+  background-color: #ffffff;
+  transition: all 0.3s ease-in-out;
+}
+
+.react-time-picker__wrapper {
+  border: none !important;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+.simple-form {
+  width: 480px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  /* Center horizontally */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Center vertically */
+}
+
+
+.simple-form .form-group {
+  margin-bottom: 15px;
+}
+
+.simple-form .form-control {
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  padding: 10px;
+}
+
+.simple-form .form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.25rem rgba(38, 143, 255, 0.25);
+}
+
+.simple-form .btn-primary {
+  width: 100%;
+  padding: 10px;
+  margin-top: 12px;
+  margin-bottom: 15px;
+  background-color: #0565cb !important;
+  border: none ;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.simple-form .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+
+.simple-form .form-label {
+  text-align: left;
+  display: block;
+}
+
+.simple-form h1 {
+  font-size: 30px;
+  padding: 20px;
+}
+
+
+.signup-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+.dnthave {
+  margin-top: 25px;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.btn-delete{
+  background-color: red !important;
+  border: none !important;
+}
+
+.btn-save{
+  background-color: #0048ff !important;
+  border: none !important;
+}
