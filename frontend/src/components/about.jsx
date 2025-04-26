@@ -2,7 +2,7 @@ import React from "react";
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center text-center p-6">
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center text-center mt-15">
       <div className="max-w-5xl px-6 py-12 text-center">
         {/* Header Section */}
         <h1 className="text-4xl font-bold mb-4">About Our Real Estate Company</h1>
@@ -34,14 +34,15 @@ const About = () => {
 
         {/* Mission & Vision */}
         <div className="mt-12 bg-green-700 p-6 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold">🏡 Our Mission</h2>
+        <h2 className="text-2xl font-bold text-white">🏡 Our Mission</h2>
+
           <p className="mt-2 text-gray-200">
             To provide our clients with exceptional real estate services, making the process of buying, selling, and renting properties seamless, stress-free, and rewarding.
           </p>
         </div>
 
-        <div className="mt-6 bg-green-800 p-6 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold">🌟 Our Vision</h2>
+        <div className="mt-6 bg-green-700 p-6 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold text-white">🌟 Our Vision</h2>
           <p className="mt-2 text-gray-200">
             To become the leading real estate agency, offering innovative solutions and creating lasting relationships with our clients.
           </p>
