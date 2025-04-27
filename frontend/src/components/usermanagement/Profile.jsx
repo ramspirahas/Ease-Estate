@@ -156,7 +156,7 @@ const Profile = () => {
             className={`px-5 py-3 font-medium text-lg transition ${activeTab === "appointments" ? "text-green-700 border-b-2 border-green-500" : "text-gray-500 hover:text-green-600"}`}
           >
             <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" />
-            Appointments
+            My Bookings
           </button>
         </nav>
       </div>
