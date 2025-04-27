@@ -35,14 +35,19 @@ function AppointmentUpdate() {
   };
 
   const handleEdit = (appointment) => {
+    
+    const date = new Date(appointment.appointmentDate);
+    const formattedDate = date.toISOString().split('T')[0];
+    
     setEditAppointment({ 
-      _id: appointment._id, // Using _id which is standard for MongoDB
+      _id: appointment._id,
       clientName: appointment.clientName,
-      appointmentDate: appointment.appointmentDate ? appointment.appointmentDate.split('T')[0] : '',
+      appointmentDate: formattedDate,
       propertyAddress: appointment.propertyAddress,
       propertyType: appointment.propertyType,
       contactEmail: appointment.contactEmail,
-      phoneNumber: appointment.phoneNumber
+      phoneNumber: appointment.phoneNumber,
+      status: appointment.status
     });
   };
 
@@ -51,9 +56,15 @@ function AppointmentUpdate() {
     if (!validateForm()) return;
 
     try {
+      
+      const formattedAppointment = {
+        ...editAppointment,
+        appointmentDate: new Date(editAppointment.appointmentDate).toISOString()
+      };
+
       await axios.put(
         `http://localhost:5001/api/appointment/appointment/${editAppointment._id}`,
-        editAppointment
+        formattedAppointment
       );
       alert("Appointment Updated Successfully!");
       setEditAppointment(null);
@@ -78,6 +89,18 @@ function AppointmentUpdate() {
     }
   };
 
+  const handleConfirm = async (id) => {
+    try {
+      const response = await axios.put(`http://localhost:5001/api/appointment/confirm/${id}`);
+      if (response.data) {
+        alert("Appointment Confirmed Successfully!");
+        fetchAppointments();
+      }
+    } catch (error) {
+      console.error("Error confirming appointment:", error);
+      alert("Failed to confirm appointment. Please try again.");
+    }
+  };
 
   const validateForm = () => {
     let newErrors = {};
@@ -95,8 +118,6 @@ function AppointmentUpdate() {
     return Object.keys(newErrors).length === 0;
   };
 
-  
-
   return (
     <div className="container mx-auto px-4 py-8">
       <h2 className="text-2xl font-bold text-center mb-8">Appointments List</h2>
@@ -111,6 +132,7 @@ function AppointmentUpdate() {
               <th className="py-2 px-4 border">Property Type</th>
               <th className="py-2 px-4 border">Email</th>
               <th className="py-2 px-4 border">Phone</th>
+              <th className="py-2 px-4 border">Status</th>
               <th className="py-2 px-4 border">Actions</th>
             </tr>
           </thead>
@@ -125,6 +147,7 @@ function AppointmentUpdate() {
                 <td className="py-2 px-4 border">{appointment.propertyType}</td>
                 <td className="py-2 px-4 border">{appointment.contactEmail}</td>
                 <td className="py-2 px-4 border">{appointment.phoneNumber}</td>
+                <td className="py-2 px-4 border">{appointment.status}</td>
                 <td className="py-2 px-4 border space-y-2">
                   <button
                     className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded mr-2"
@@ -133,11 +156,19 @@ function AppointmentUpdate() {
                     Edit
                   </button>
                   <button
-                    className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded"
+                    className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded mr-2"
                     onClick={() => handleDelete(appointment._id)}
                   >
                     Delete
                   </button>
+                  {appointment.status === 'Pending' && (
+                    <button
+                      className="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded"
+                      onClick={() => handleConfirm(appointment._id)}
+                    >
+                      Confirm
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
@@ -232,6 +263,23 @@ function AppointmentUpdate() {
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
               />
               {errors.phoneNumber && <p className="mt-1 text-sm text-red-600">{errors.phoneNumber}</p>}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Status</label>
+              <select
+                name="status"
+                value={editAppointment.status}
+                onChange={handleChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
+              >
+                <option value="Pending">Pending</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Cancelled">Cancelled</option>
+                <option value="Completed">Completed</option>
+                <option value="Virtual">Virtual</option>
+                <option value="Visit">Visit</option>
+              </select>
             </div>
 
             <div className="flex justify-end space-x-4 pt-4">

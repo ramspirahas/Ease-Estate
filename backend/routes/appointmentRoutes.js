@@ -5,7 +5,8 @@ import {
     getAllAppointments,
     deleteAppointment,
     updateAppointment,
-    schedulePropertyAppointment
+    schedulePropertyAppointment,
+    confirmAppointment
 } from "../controllers/appointmentController.js";
 
 const appointmentRouter = express.Router(); 
@@ -17,5 +18,6 @@ appointmentRouter.post("/addappointment", addAppointment); // Add a new appointm
 appointmentRouter.delete("/delete/:id", deleteAppointment); // Delete an appointment by ID
 appointmentRouter.put("/appointment/:id", updateAppointment); // Update an appointment by ID
 appointmentRouter.post("/schedule-property-appointment", schedulePropertyAppointment); // New endpoint for scheduling based on property availability
+appointmentRouter.put("/confirm/:id", confirmAppointment); // Confirm an appointment
 
 export default appointmentRouter;
