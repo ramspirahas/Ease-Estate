@@ -148,3 +148,27 @@ export const schedulePropertyAppointment = async (req, res) => {
         return res.status(500).json({ message: "Error during appointment scheduling", error: error.message });
     }
 };
+
+
+export const confirmAppointment = async (req, res) => {
+    const appointmentId = req.params.id;
+    try {
+        const appointment = await Appointment.findByIdAndUpdate(
+            { _id: appointmentId },
+            { status: 'Confirmed' },
+            { new: true }
+        );
+        
+        if (appointment) {
+            return res.status(200).json({ 
+                message: "Appointment Confirmed Successfully", 
+                data: appointment 
+            });
+        } else {
+            return res.status(404).json({ message: "Appointment not found" });
+        }
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).json({ message: "Error during confirming appointment" });
+    }
+};

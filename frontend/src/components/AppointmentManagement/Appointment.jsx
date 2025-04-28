@@ -43,7 +43,7 @@ function Appointments() {
     const handleUpdateStatus = async (appointmentId, newStatus) => {
         try {
             const response = await axios.put(
-                `http://localhost:5001/api/appointment/update/${appointmentId}`,
+                `http://localhost:5001/api/appointment/appointment/${appointmentId}`,
                 { status: newStatus }
             );
             if (response.status === 200) {
