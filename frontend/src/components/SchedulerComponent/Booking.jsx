@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -7,6 +7,8 @@ import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faUser, faPhone, faDollarSign, faClock, faCalendarAlt, faInfo } from '@fortawesome/free-solid-svg-icons';
 import AddAppointment from '../AppointmentManagement/AddAppointment';
+
+const API_URL = 'http://localhost:5001';
 
 function Booking({ setShow, show, selectedEvent }) {
     const handleClose = () => setShow(false);
@@ -53,10 +55,14 @@ function Booking({ setShow, show, selectedEvent }) {
                             {selectedEvent.propertyPhotos && (
                                 <div className="mb-4 text-center">
                                     <img 
-                                        src={`http://localhost:5000${selectedEvent.propertyPhotos}`}
+                                        src={`${API_URL}${selectedEvent.propertyPhotos}`}
                                         alt={selectedEvent.title}
                                         className="img-fluid rounded"
-                                        style={{ maxHeight: '300px', objectFit: 'cover' }}
+                                        style={{ maxHeight: '300px', objectFit: 'cover', width: '100%' }}
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = 'https://via.placeholder.com/300x200?text=No+Image+Available';
+                                        }}
                                     />
                                 </div>
                             )}
